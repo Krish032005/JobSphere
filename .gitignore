@@ -1,0 +1,11 @@
+#Backend keys & files / folder
+backend/node_modules/
+backend/.env
+
+
+
+
+
+#Frontend keys & files / folder
+frontend/node_modules/
+frontend/.env
