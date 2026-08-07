@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 async function registerUser(req,res){
     const { name, email, password, role="candidate"} = req.body;
 
+
     if (!name || !email || !password) {
     return res.status(400).json({
         message: "All fields are required"
@@ -17,6 +18,7 @@ async function registerUser(req,res){
    if(isUserAlreadyExists){
     return res.status(409).json({ message : "User Already Exists !!"});
    }
+  
 
    const hash =  await bcrypt.hash(password,10);
 
@@ -50,7 +52,7 @@ async function loginUser(req,res){
         if(!User){
             return res.status(401).json({ message : "Unauthorized !!"});
         }
-    
+        
         const isPasswordCorrect = await bcrypt.compare(password, User.password);
         if(!isPasswordCorrect){
             return res.status(409).json({message : "Invalid Credentials"})
@@ -74,6 +76,7 @@ async function loginUser(req,res){
         })
     }
 }
+
 
 
 module.exports= {registerUser, loginUser};

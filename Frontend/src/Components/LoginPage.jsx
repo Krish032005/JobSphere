@@ -1,8 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import milestone from "../assets/milestone.png";
+import axios from "axios";
 
 const LoginPage = () => {
+  const [User, setUser] = useState({
+    email :"",
+    password: "",
+  })
+
+
+  const handler = async(e)=>{
+    e.preventDefault();
+    try{
+       const res = await axios.post("http://localhost:3000/api/auth/login",User);
+    
+        console.log(res.data);
+        alert("Login successfully");
+    
+        setUser({
+          email : "",
+          password : "",
+        })
+    }catch(err){
+      console.log(err);
+      alert("Login Unsuccessfull");
+    }
+
+  }
+
+  const handle = async(e)=>{
+    setUser({
+      ...User,
+      [e.target.name] : e.target.value,
+    })
+  }
+
+
+  
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
       <div className="bg-white rounded-3xl shadow-lg w-full max-w-6xl flex flex-col lg:flex-row overflow-hidden">
@@ -13,7 +49,7 @@ const LoginPage = () => {
             <img
               src={milestone}
               alt="Logo"
-              className="w-28 h-28 object-contain"
+              className="w-50 h-50 object-contain"
             />
           </div>
 
@@ -21,7 +57,7 @@ const LoginPage = () => {
             Welcome Back!
           </h2>
 
-          <div className="space-y-5">
+          <div className="space-y-5 ">
             <div className="flex items-start gap-3">
               <div className="w-5 h-5 rounded-full bg-green-500 mt-1"></div>
               <p className="text-gray-600">
@@ -53,12 +89,12 @@ const LoginPage = () => {
               Don't have an account?
             </span>
 
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="ml-2 text-blue-600 font-semibold hover:underline"
             >
               Sign Up
-            </a>
+            </Link>
           </div>
 
           <div className="max-w-md mx-auto">
@@ -70,6 +106,7 @@ const LoginPage = () => {
             <p className="text-gray-500 mt-2 mb-8">
               Access your profile and continue your journey.
             </p>
+            <form onSubmit={handler}>
 
             {/* Email */}
             <div className="mb-5">
@@ -79,6 +116,9 @@ const LoginPage = () => {
 
               <input
                 type="email"
+                name="email"
+                value={User.email}
+                onChange={handle}
                 placeholder="Enter your email"
                 className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -92,6 +132,9 @@ const LoginPage = () => {
 
               <input
                 type="password"
+                name="password"
+                value={User.password}
+                onChange={handle}
                 placeholder="Enter your password"
                 className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -104,28 +147,15 @@ const LoginPage = () => {
             </div>
 
             {/* Login Button */}
-            <button className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-xl font-semibold">
+            <button className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-xl font-semibold active:scale-95 cursor-pointer">
               Login
             </button>
+            </form>
 
-            {/* Divider */}
-            <div className="flex items-center my-7">
-              <div className="flex-1 border"></div>
+            
 
-              <span className="mx-4 text-gray-500 text-sm">
-                OR
-              </span>
-
-              <div className="flex-1 border"></div>
-            </div>
-
-            {/* Google */}
-            <button className="w-full border rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition">
-              <FcGoogle size={24} />
-              <span className="font-medium">
-                Continue with Google
-              </span>
-            </button>
+            
+            
 
           </div>
         </div>

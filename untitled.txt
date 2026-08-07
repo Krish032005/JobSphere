@@ -1,0 +1,173 @@
+jobsphere-backend/
+├── src/
+│   ├── config/
+│   │   ├── db.js                  # MongoDB connection
+│   │   ├── cloudinary.js          # resume/logo/avatar uploads
+│   │   └── env.js                 # centralized env config
+│   │
+│   ├── models/
+│   │   ├── User.model.js
+│   │   ├── Company.model.js
+│   │   ├── Job.model.js
+│   │   ├── Application.model.js
+│   │   ├── Resume.model.js
+│   │   ├── Review.model.js
+│   │   ├── SavedJob.model.js
+│   │   ├── Notification.model.js
+│   │   └── Message.model.js
+│   │
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   ├── user.controller.js
+│   │   ├── company.controller.js
+│   │   ├── job.controller.js
+│   │   ├── application.controller.js
+│   │   ├── resume.controller.js
+│   │   ├── review.controller.js
+│   │   ├── savedJob.controller.js
+│   │   ├── notification.controller.js
+│   │   ├── message.controller.js
+│   │   └── admin.controller.js
+│   │
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   ├── user.routes.js
+│   │   ├── company.routes.js
+│   │   ├── job.routes.js
+│   │   ├── application.routes.js
+│   │   ├── resume.routes.js
+│   │   ├── review.routes.js
+│   │   ├── savedJob.routes.js
+│   │   ├── notification.routes.js
+│   │   ├── message.routes.js
+│   │   ├── admin.routes.js
+│   │   └── index.js               # combines all routes
+│   │
+│   ├── middlewares/
+│   │   ├── auth.middleware.js     # verify JWT
+│   │   ├── role.middleware.js     # RBAC: jobseeker/employer/admin
+│   │   ├── upload.middleware.js   # multer config
+│   │   ├── validate.middleware.js # joi/zod schema validation
+│   │   └── error.middleware.js    # global error handler
+│   │
+│   ├── validators/
+│   │   ├── auth.validator.js
+│   │   ├── job.validator.js
+│   │   └── application.validator.js
+│   │
+│   ├── utils/
+│   │   ├── generateToken.js
+│   │   ├── sendEmail.js
+│   │   ├── apiError.js
+│   │   ├── apiResponse.js
+│   │   └── asyncHandler.js
+│   │
+│   ├── sockets/
+│   │   └── chat.socket.js         # real-time messaging (optional)
+│   │
+│   ├── app.js                     # express app, middlewares, routes
+│   └── server.js                  # entry point, http server + socket.io
+│
+├── .env
+├── .gitignore
+├── package.json
+└── README.md
+
+Model	Key Fields
+User	name, email, password, role (jobseeker/employer/admin), avatar, phone, isVerified, resumeId
+Company	name, logo, description, website, industry, location, createdBy (employer), isApproved
+Job	title, description, company (ref), postedBy (ref), location, salaryRange, jobType (full-time/part-time/remote), experienceLevel, skills[], category, status (open/closed), applicationDeadline
+Application	job (ref), applicant (ref), resume (ref), coverLetter, status (pending/shortlisted/rejected/hired), appliedAt
+Resume	user (ref), fileUrl, isPrimary
+Review	company (ref), user (ref), rating, comment
+SavedJob	user (ref), job (ref)
+Notification	user (ref), type, message, isRead
+Message	sender (ref), receiver (ref), content, conversationId
+3. Routes & Controllers by Module
+
+auth → /api/auth
+
+POST /register, /login, /logout, /refresh-token
+POST /forgot-password, /reset-password/:token
+GET /verify-email/:token, /me
+
+user → /api/users
+
+GET /:id, PATCH /:id, DELETE /:id
+PATCH /:id/avatar, PATCH /:id/password
+
+company → /api/companies
+
+POST / (employer creates), GET /, GET /:id
+PATCH /:id, DELETE /:id
+GET /:id/jobs, PATCH /:id/logo
+
+job → /api/jobs
+
+POST / (employer only)
+GET / (search + filters: location, salary, type, experience, keyword, pagination)
+GET /:id, PATCH /:id, DELETE /:id
+GET /employer/my-jobs
+
+application → /api/applications
+
+POST /:jobId/apply
+GET /my-applications (jobseeker)
+GET /job/:jobId (employer view)
+PATCH /:id/status, DELETE /:id (withdraw)
+
+resume → /api/resumes
+
+POST /upload, GET /, DELETE /:id, PATCH /:id/primary
+
+review → /api/reviews
+
+POST /company/:companyId, GET /company/:companyId
+
+savedJob → /api/saved-jobs
+
+POST /:jobId, DELETE /:jobId, GET /
+
+notification → /api/notifications
+
+GET /, PATCH /:id/read
+
+message → /api/messages
+
+POST /, GET /conversation/:userId
+
+admin → /api/admin
+
+GET /users, GET /companies/pending, PATCH /companies/:id/approve
+GET /dashboard-stats, DELETE /jobs/:id, DELETE /users/:id
+4. Features to Include
+
+Must-have
+
+Role-based auth (JWT access + refresh token)
+Job posting, editing, closing (employer)
+Advanced job search — text index, filters (location/salary/type/experience), pagination/sorting
+Application tracking (apply, status updates, withdraw)
+Resume upload via Cloudinary/S3
+Company profiles with approval workflow
+Saved jobs / wishlist
+Email notifications (application received, status change) via Nodemailer
+
+Good-to-have
+
+Real-time notifications & chat (Socket.io)
+Job alerts via cron job (node-cron) matching saved search criteria
+Company reviews & ratings
+Admin dashboard with analytics (total jobs, applications, active users)
+Rate limiting (express-rate-limit), Helmet, mongo-sanitize, CORS
+Resume parsing (extract skills from PDF) — optional AI feature
+Paid/featured job listings (Stripe/Razorpay) — monetization
+
+Security essentials
+
+bcrypt for passwords, JWT with short-lived access + rotating refresh tokens
+Input validation with Joi/Zod on every route
+Centralized error handling + async wrapper to avoid try/catch repetition
+Role middleware guarding employer/admin-only routes
+
+Want me to scaffold this as actual starter code (models + auth flow + one full module like Job) so you can run it locally?
