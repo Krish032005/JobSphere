@@ -1,9 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const authRouter = require("../src/routes/auth.route");
 const multer = require("multer");
 const app = express();
 const cookieParser = require("cookie-parser");
+
+const authRouter = require("../src/routes/auth.route");
+const candidateRouter = require("../src/routes/candidateProfile.route");
+
+
+
+
+
 
 
 const upload = multer({
@@ -15,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/auth/", authRouter);
+app.use("/api/candidate/", candidateRouter);
 
 
 

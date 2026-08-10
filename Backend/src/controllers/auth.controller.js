@@ -1,6 +1,7 @@
-const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const userModel = require("../models/user.model");
+const candidateProfile = require("../models/candidateProfile");
 
 
 async function registerUser(req,res){
@@ -28,6 +29,13 @@ async function registerUser(req,res){
     password : hash,
     role,
    })
+
+   if(user.role === "candidate"){
+       await candidateProfile.create({
+        user : user._id,
+       })
+   }
+
    const token = jwt.sign({
     id : user._id,
     role : user.role,
