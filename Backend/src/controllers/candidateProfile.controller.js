@@ -1,6 +1,4 @@
-const candidateProfile = require("../models/candidateProfile");
-
-
+const candidateProfile = require("../models/candidateProfile.model");
 
 async function profile(req,res){
     try{
@@ -49,7 +47,7 @@ async function updateProfile(req,res){
         candidate.skills = skills;
         candidate.education = education;
         candidate.experience = experience;
-        
+
         await candidate.save();
 
         return res.status(200).json({

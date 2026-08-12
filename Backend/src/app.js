@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 
 const authRouter = require("../src/routes/auth.route");
 const candidateRouter = require("../src/routes/candidateProfile.route");
-
+const recruiterRouter = require("../src/routes/recruiterProfile.route");
 
 
 
@@ -23,6 +23,7 @@ app.use(cookieParser());
 
 app.use("/api/auth/", authRouter);
 app.use("/api/candidate/", candidateRouter);
+app.use("/api/recruiter/", recruiterRouter);
 
 
 

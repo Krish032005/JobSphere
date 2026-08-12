@@ -1,173 +1,161 @@
+Candidate can:
+
+Register/login                                              Done
+Create profile                                              DONE
+Upload profile photo
+Upload resume
+Edit profile                                                DONE
+Add skills, education, experience                           Done
+Search jobs
+Filter jobs
+View job details
+Apply for jobs
+Save jobs
+Track applications
+See application status
+Get AI resume analysis
+Get resume improvement suggestions
+Get recommended jobs/companies
+Eventually get AI career recommendations
+
+
+Recruiter can:
+
+Register/login
+Create company/recruiter profile
+Create jobs
+Edit/delete jobs
+Publish/unpublish jobs
+View applicants
+View applicant profiles
+Download/view resumes
+Shortlist/reject candidates
+Change application status
+Use AI to rank applicants
+See recruitment analytics
+Eventually use paid recruiter features
+
+
 jobsphere-backend/
-├── src/
-│   ├── config/
-│   │   ├── db.js                  # MongoDB connection
-│   │   ├── cloudinary.js          # resume/logo/avatar uploads
-│   │   └── env.js                 # centralized env config
-│   │
-│   ├── models/
-│   │   ├── User.model.js
-│   │   ├── Company.model.js
-│   │   ├── Job.model.js
-│   │   ├── Application.model.js
-│   │   ├── Resume.model.js
-│   │   ├── Review.model.js
-│   │   ├── SavedJob.model.js
-│   │   ├── Notification.model.js
-│   │   └── Message.model.js
-│   │
-│   ├── controllers/
-│   │   ├── auth.controller.js
-│   │   ├── user.controller.js
-│   │   ├── company.controller.js
-│   │   ├── job.controller.js
-│   │   ├── application.controller.js
-│   │   ├── resume.controller.js
-│   │   ├── review.controller.js
-│   │   ├── savedJob.controller.js
-│   │   ├── notification.controller.js
-│   │   ├── message.controller.js
-│   │   └── admin.controller.js
-│   │
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   ├── user.routes.js
-│   │   ├── company.routes.js
-│   │   ├── job.routes.js
-│   │   ├── application.routes.js
-│   │   ├── resume.routes.js
-│   │   ├── review.routes.js
-│   │   ├── savedJob.routes.js
-│   │   ├── notification.routes.js
-│   │   ├── message.routes.js
-│   │   ├── admin.routes.js
-│   │   └── index.js               # combines all routes
-│   │
-│   ├── middlewares/
-│   │   ├── auth.middleware.js     # verify JWT
-│   │   ├── role.middleware.js     # RBAC: jobseeker/employer/admin
-│   │   ├── upload.middleware.js   # multer config
-│   │   ├── validate.middleware.js # joi/zod schema validation
-│   │   └── error.middleware.js    # global error handler
-│   │
-│   ├── validators/
-│   │   ├── auth.validator.js
-│   │   ├── job.validator.js
-│   │   └── application.validator.js
-│   │
-│   ├── utils/
-│   │   ├── generateToken.js
-│   │   ├── sendEmail.js
-│   │   ├── apiError.js
-│   │   ├── apiResponse.js
-│   │   └── asyncHandler.js
-│   │
-│   ├── sockets/
-│   │   └── chat.socket.js         # real-time messaging (optional)
-│   │
-│   ├── app.js                     # express app, middlewares, routes
-│   └── server.js                  # entry point, http server + socket.io
 │
-├── .env
-├── .gitignore
-├── package.json
-└── README.md
-
-Model	Key Fields
-User	name, email, password, role (jobseeker/employer/admin), avatar, phone, isVerified, resumeId
-Company	name, logo, description, website, industry, location, createdBy (employer), isApproved
-Job	title, description, company (ref), postedBy (ref), location, salaryRange, jobType (full-time/part-time/remote), experienceLevel, skills[], category, status (open/closed), applicationDeadline
-Application	job (ref), applicant (ref), resume (ref), coverLetter, status (pending/shortlisted/rejected/hired), appliedAt
-Resume	user (ref), fileUrl, isPrimary
-Review	company (ref), user (ref), rating, comment
-SavedJob	user (ref), job (ref)
-Notification	user (ref), type, message, isRead
-Message	sender (ref), receiver (ref), content, conversationId
-3. Routes & Controllers by Module
-
-auth → /api/auth
-
-POST /register, /login, /logout, /refresh-token
-POST /forgot-password, /reset-password/:token
-GET /verify-email/:token, /me
-
-user → /api/users
-
-GET /:id, PATCH /:id, DELETE /:id
-PATCH /:id/avatar, PATCH /:id/password
-
-company → /api/companies
-
-POST / (employer creates), GET /, GET /:id
-PATCH /:id, DELETE /:id
-GET /:id/jobs, PATCH /:id/logo
-
-job → /api/jobs
-
-POST / (employer only)
-GET / (search + filters: location, salary, type, experience, keyword, pagination)
-GET /:id, PATCH /:id, DELETE /:id
-GET /employer/my-jobs
-
-application → /api/applications
-
-POST /:jobId/apply
-GET /my-applications (jobseeker)
-GET /job/:jobId (employer view)
-PATCH /:id/status, DELETE /:id (withdraw)
-
-resume → /api/resumes
-
-POST /upload, GET /, DELETE /:id, PATCH /:id/primary
-
-review → /api/reviews
-
-POST /company/:companyId, GET /company/:companyId
-
-savedJob → /api/saved-jobs
-
-POST /:jobId, DELETE /:jobId, GET /
-
-notification → /api/notifications
-
-GET /, PATCH /:id/read
-
-message → /api/messages
-
-POST /, GET /conversation/:userId
-
-admin → /api/admin
-
-GET /users, GET /companies/pending, PATCH /companies/:id/approve
-GET /dashboard-stats, DELETE /jobs/:id, DELETE /users/:id
-4. Features to Include
-
-Must-have
-
-Role-based auth (JWT access + refresh token)
-Job posting, editing, closing (employer)
-Advanced job search — text index, filters (location/salary/type/experience), pagination/sorting
-Application tracking (apply, status updates, withdraw)
-Resume upload via Cloudinary/S3
-Company profiles with approval workflow
-Saved jobs / wishlist
-Email notifications (application received, status change) via Nodemailer
-
-Good-to-have
-
-Real-time notifications & chat (Socket.io)
-Job alerts via cron job (node-cron) matching saved search criteria
-Company reviews & ratings
-Admin dashboard with analytics (total jobs, applications, active users)
-Rate limiting (express-rate-limit), Helmet, mongo-sanitize, CORS
-Resume parsing (extract skills from PDF) — optional AI feature
-Paid/featured job listings (Stripe/Razorpay) — monetization
-
-Security essentials
-
-bcrypt for passwords, JWT with short-lived access + rotating refresh tokens
-Input validation with Joi/Zod on every route
-Centralized error handling + async wrapper to avoid try/catch repetition
-Role middleware guarding employer/admin-only routes
-
-Want me to scaffold this as actual starter code (models + auth flow + one full module like Job) so you can run it locally?
+├── src/
+│   │
+│   ├── config/                         # Configuration of external/internal services
+│   │   ├── db.js                       # Connects backend to MongoDB
+│   │   ├── cloudinary.js               # Configures Cloudinary for resume/profile/logo uploads
+│   │   ├── env.js                      # Loads and manages environment variables
+│   │   └── ai.js                       # Configures your AI provider/API
+│   │
+│   ├── controllers/                    # Receives requests and sends responses
+│   │   ├── auth.controller.js          # Register, login, logout, email verification
+│   │   │
+│   │   ├── candidate/                  # Everything related to candidates
+│   │   │   ├── candidateProfile.controller.js
+│   │   │   │                              # Create/update/view candidate profile
+│   │   │   │
+│   │   │   ├── resume.controller.js    # Upload, replace, delete and view resume
+│   │   │   │
+│   │   │   ├── savedJob.controller.js  # Save/unsave jobs and view saved jobs
+│   │   │   │
+│   │   │   └── candidateApplication.controller.js
+│   │   │                                  # Apply for jobs and view application status
+│   │   │
+│   │   ├── recruiter/                  # Everything related to recruiters
+│   │   │   ├── recruiterProfile.controller.js
+│   │   │   │                              # Create/update recruiter/company profile
+│   │   │   │
+│   │   │   ├── recruiterJob.controller.js
+│   │   │   │                              # Recruiter creates, edits and closes jobs
+│   │   │   │
+│   │   │   ├── applicant.controller.js # Recruiter views candidates who applied
+│   │   │   │
+│   │   │   └── recruiterAnalytics.controller.js
+│   │   │                                  # Job views, applications, hiring statistics
+│   │   │
+│   │   ├── job.controller.js            # General job search, filtering and job details
+│   │   │
+│   │   ├── application.controller.js    # General application operations
+│   │   │
+│   │   ├── ai/                          # AI-powered JobSphere features
+│   │   │   ├── resumeAnalysis.controller.js
+│   │   │   │                              # AI analyzes candidate's resume
+│   │   │   │                              # Finds missing skills, weaknesses, improvements
+│   │   │   │
+│   │   │   ├── resumeRanking.controller.js
+│   │   │   │                              # AI ranks applicants for a recruiter's job
+│   │   │   │
+│   │   │   └── jobRecommendation.controller.js
+│   │   │                                  # AI recommends suitable jobs to candidates
+│   │   │
+│   │   ├── payment.controller.js         # Handles payments and subscriptions
+│   │   │
+│   │   └── notification.controller.js    # Creates/reads candidate & recruiter notifications
+│   │
+│   ├── models/                           # MongoDB database schemas
+│   │   ├── User.js                       # Basic account: name, email, password, role
+│   │   ├── CandidateProfile.js            # Candidate's skills, education, experience, etc.
+│   │   ├── RecruiterProfile.js            # Recruiter's/company information
+│   │   ├── Resume.js                     # Resume file and resume metadata
+│   │   ├── Job.js                        # Job posting: title, salary, skills, location, etc.
+│   │   ├── Application.js                # Connects candidate ↔ job and stores application status
+│   │   ├── SavedJob.js                   # Stores which jobs a candidate saved
+│   │   ├── Subscription.js               # Candidate/recruiter premium subscription details
+│   │   ├── Payment.js                    # Payment transaction records
+│   │   ├── ResumeAnalysis.js             # Stores AI resume analysis results
+│   │   ├── JobRecommendation.js          # Stores AI-generated job recommendations
+│   │   ├── Notification.js               # Stores user notifications
+│   │   └── Company.js                    # Company details, logo, industry, website, etc.
+│   │
+│   ├── routes/                           # API URL definitions
+│   │   ├── auth.routes.js                # /api/auth/register, /login, /logout
+│   │   ├── candidate.routes.js           # Candidate profile/resume/saved-job APIs
+│   │   ├── recruiter.routes.js           # Recruiter profile/job/applicant APIs
+│   │   ├── job.routes.js                 # Job search/details APIs
+│   │   ├── application.routes.js         # Job application APIs
+│   │   ├── ai.routes.js                  # AI feature APIs
+│   │   ├── payment.routes.js             # Payment/subscription APIs
+│   │   └── notification.routes.js        # Notification APIs
+│   │
+│   ├── middleware/                       # Runs between request and controller
+│   │   ├── auth.middleware.js             # Checks JWT and identifies logged-in user
+│   │   ├── role.middleware.js             # Checks candidate vs recruiter permissions
+│   │   ├── upload.middleware.js           # Handles uploaded resume/logo/avatar files
+│   │   ├── error.middleware.js            # Handles errors in one central place
+│   │   └── validation.middleware.js       # Validates incoming request data
+│   │
+│   ├── services/                         # Business logic / heavy operations
+│   │   ├── auth.service.js                # Authentication-related business logic
+│   │   ├── resume.service.js              # Resume upload/storage/processing logic
+│   │   ├── ai.service.js                  # Talks to AI and processes AI results
+│   │   ├── job.service.js                 # Job creation/search/filter business logic
+│   │   ├── application.service.js         # Application processing logic
+│   │   ├── payment.service.js             # Payment gateway/subscription logic
+│   │   ├── notification.service.js        # Notification creation/sending logic
+│   │   └── analytics.service.js           # Calculates recruiter/job statistics
+│   │
+│   ├── utils/                            # Small reusable helper functions
+│   │   ├── jwt.js                        # Create and verify JWT tokens
+│   │   ├── bcrypt.js                     # Hash and compare passwords
+│   │   ├── apiResponse.js                # Standardizes API responses
+│   │   ├── asyncHandler.js               # Handles async controller errors
+│   │   └── constants.js                  # Stores fixed values/enums
+│   │
+│   ├── validators/                       # Rules for validating request data
+│   │   ├── auth.validator.js             # Validates register/login data
+│   │   ├── profile.validator.js          # Validates candidate/recruiter profiles
+│   │   ├── job.validator.js              # Validates job posting data
+│   │   └── application.validator.js      # Validates job application data
+│   │
+│   ├── app.js                            # Creates Express app and connects routes/middleware
+│   │
+│   └── server.js                         # Starts the server and connects required services
+│
+├── uploads/                              # Temporary/local uploaded files
+│
+├── .env                                  # Secrets: DB URL, JWT secret, AI key, Cloudinary keys
+│
+├── .gitignore                            # Files Git should not upload
+│
+├── package.json                          # Dependencies, scripts and project information
+│
+└── README.md                             # Documentation explaining how JobSphere works

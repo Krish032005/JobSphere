@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model");
-const candidateProfile = require("../models/candidateProfile");
+const candidateProfile = require("../models/candidateProfile.model");
+const recruiterProfile = require("../models/recruiterProfile.model");
 
 
 async function registerUser(req,res){
@@ -34,6 +35,11 @@ async function registerUser(req,res){
        await candidateProfile.create({
         user : user._id,
        })
+   }
+   if(user.role ===  "recruiter"){
+    await recruiterProfile.create({
+        user : user._id,
+    })
    }
 
    const token = jwt.sign({

@@ -45,11 +45,7 @@ const candidateSchema = new mongoose.Schema({
       public_id: String,
       url: String,
     },
-
-    resume: {
-      public_id: String,
-      url: String,
-    },
+    
     socialLinks: {
         github: String,
         linkedin: String,
