@@ -19,14 +19,17 @@ try{
 
     const result = await upload(req.file.buffer);
     const resume = await resumeModel.create({
+        candidate : candidate._id,
         resume_url : result.url,
-        public_id : result.fileId,
-        fileName : result.name, 
+        publicId : result.fileId,
+        fileName : result.name,
+         
     })
 
     return res.status(200).json({
         message : "Resume uploaded successfully",
         resume,
+        candidate
     })
 }catch(err){
     console.log(err);
