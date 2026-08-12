@@ -42,4 +42,32 @@ async function jobPost(req,res){
     }
 }
 
-module.exports= {jobPost};
+
+async function getJobs(req, res) {
+    try {
+
+        const jobs = await jobModel
+            .find({ status: "active" })
+            .populate(
+                "recruiter",
+                "company_name company_logo company_website company_description company_type location"
+            )
+            .sort({ createdAt: -1 });
+
+        return res.status(200).json({
+            success: true,
+            count: jobs.length,
+            jobs
+        });
+
+    } catch (err) {
+        console.log(err);
+
+        return res.status(500).json({
+            message: "Internal error"
+        });
+    }
+}
+
+
+module.exports= {jobPost, getJobs};
