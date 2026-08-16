@@ -46,11 +46,6 @@ async function applyJob(req, res) {
         }
 
 
-        // 4. Find resume and make sure it belongs to this user
-        console.log("USER ID:", userId);
-console.log("CANDIDATE ID:", candidate._id);
-console.log("RESUME ID FROM BODY:", resumeId);
-
         const resume = await resumeModel.findOne({
             _id: resumeId,
             candidate: candidate._id
@@ -100,6 +95,10 @@ console.log("RESUME ID FROM BODY:", resumeId);
             message: "Internal error"
         });
     }
+}
+
+async function saveJob(req,res){
+    
 }
 
 module.exports = { applyJob };
