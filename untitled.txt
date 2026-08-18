@@ -14,3 +14,7 @@ Recruiter :
 3. Create/Modified - JobPost
 4. See Applicants - Dashboard
 5.  
+
+
+WorkFlow : 
+Candidate -> Register -> Login -> UpdateProfile
