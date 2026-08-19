@@ -14,7 +14,7 @@ async function applyJob(req, res) {
         const jobId = req.params.jobId;
 
         // Get resume and cover letter from request body
-        const { resumeId, coverLetter } = req.body;
+        const { resumeId, coverLetter } = req.body || {};
 
 
         // 1. Find candidate profile
@@ -45,6 +45,11 @@ async function applyJob(req, res) {
                 message: "This job is no longer active"
             });
         }
+        if (!resumeId) {
+            return res.status(400).json({
+            message: "Resume ID is required"
+        });
+}
 
 
         const resume = await resumeModel.findOne({
@@ -121,19 +126,19 @@ async function saveJob(req,res){
         }
 
         // Saved already 
-        const existSaved = await saveModel.findOne({ 
-            candidate : candidate._id,
+        const existSaved = await savedModel.findOne({ 
+            candidate : existCandidate._id,
             job : jobId,
         })
-        if (alreadySaved) {
+        if (existSaved) {
             return res.status(409).json({
                     success: false,
                     message: "Job already saved",
             });
         }
 
-        const savedJob = await savedJobModel.create({
-            candidate: candidate._id,
+        const savedJob = await savedModel.create({
+            candidate: existCandidate._id,
             job: jobId,
         });
 
@@ -171,7 +176,7 @@ async function unsaveJob(req, res) {
     }
 
     // Find and delete saved job
-    const deletedJob = await savedJobModel.findOneAndDelete({
+    const deletedJob = await savedModel.findOneAndDelete({
       candidate: candidate._id,
       job: jobId,
     });
@@ -198,6 +203,38 @@ async function unsaveJob(req, res) {
   }
 }
 
+async function appliedJob(req,res){
+    try{
+        const userId = req.user.id;
+        
+        const existCandidate = await candidateProfile.findOne({user : userId});
+        if(!existCandidate){
+            return res.status(409).json({
+                message : "User not found",
+            })
+        } 
+
+        const application = await applicationModel
+        .find({candidate : existCandidate._id})
+        .populate("job")
+        .populate("resume")
+        .sort({ created : -1});
+
+        return res.status(200).json({
+            success: true,
+            application
+        });
 
 
-module.exports = { applyJob, saveJob, unsaveJob};
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            message: "Internal error"
+        });
+
+    }
+}
+
+
+
+module.exports = { applyJob, saveJob, unsaveJob, appliedJob};

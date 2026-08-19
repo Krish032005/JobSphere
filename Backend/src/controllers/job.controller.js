@@ -69,5 +69,37 @@ async function getJobs(req, res) {
     }
 }
 
+async function getJobsCreated(req,res){
+   try{
 
-module.exports= {jobPost, getJobs};
+    const userId = req.user.id;
+
+    const recruiter = await recruiterProfile.findOne({user : userId});
+    if(!recruiter){
+        return res.status(404).json({
+                message: "Recruiter profile not found"
+        });
+    }
+
+    const jobs = await jobModel
+    .find({ recruiter : recruiter._id})
+    .sort({ createdAt : -1});
+
+    return res.status(200).json({
+        success: true,
+        count: jobs.length,
+        jobs
+    });
+
+
+   }catch(err){
+
+    console.log(err);
+    return res.status(500).json({
+        message: "Internal error"
+    });
+   }
+}
+
+
+module.exports= {jobPost, getJobs, getJobsCreated};

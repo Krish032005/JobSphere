@@ -17,4 +17,5 @@ Recruiter :
 
 
 WorkFlow : 
-Candidate -> Register -> Login -> UpdateProfile
+Candidate -> Register -> Login -> UpdateProfile -> upload avatar & Resume -> search Jobs & Save/Unsaved -> Can See Applied jobs 
+Recruiter -> Register -> Login -> UpdateProfile -> Create-JobPost -> Can See applicants
