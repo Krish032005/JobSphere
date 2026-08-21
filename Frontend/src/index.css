@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+:root {
+  --color-bg:#000 ;
+  --color-surface: #0b0b0b ;
+  --color-surface-secondary: #1b1b1b  ;
+
+  --color-primary: #f6883f9d; /* used as the border*/
+  --color-primary-hover:#fa7a25 ;
+
+  --color-text: ;
+  --color-text-secondary: ;
+
+  --color-border:#1a1a1a ;
+
+  --color-success: ;
+  --color-warning: ;
+  --color-error: ;
+}
