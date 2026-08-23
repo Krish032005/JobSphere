@@ -12,7 +12,7 @@ const Footer = () => {
       <div className='flex justify-between mb-12'>
         <div className='max-w-sm'>
           <h1 className='font-bold text-2xl mb-3'>JobSphere</h1>
-          <p className='font-semibold text-(--color-text-secondary)'>
+          <p className='font-semibold text-(--color-btn)'>
             Connecting candidates and recruiters in one place.
           </p>
         </div>
@@ -20,9 +20,11 @@ const Footer = () => {
         <div className='flex gap-16'>
           {Object.entries(footerLinks).map(([heading, links]) => (
             <div key={heading} className='flex flex-col gap-3'>
-              <h3 className='font-bold text-lg mb-1 text-(--color-primary-hover)'>{heading}</h3>
+              <h3 className='font-bold text-lg mb-1 text-(--color-btn)'>
+              {heading}</h3>
+
               {links.map((link) => (
-                <span key={link} className='font-semibold text-(--color-text-secondary) cursor-pointer w-fit hover:text-(--color-primary) duration-300'>
+                <span key={link} className='font-semibold text-(--color-text-secondary) cursor-pointer w-fit hover:text-(--color-text-hover) duration-300'>
                   {link}
                 </span>
               ))}
@@ -34,9 +36,9 @@ const Footer = () => {
       <div className='flex justify-between items-center pt-6 border-t border-(--color-border)'>
         <p className='font-semibold text-(--color-text-secondary)'>© 2026 JobSphere. All rights reserved.</p>
         <div className='flex gap-6'>
-          <span className='font-semibold cursor-pointer hover:text-(--color-primary) duration-300'>Twitter</span>
-          <span className='font-semibold cursor-pointer hover:text-(--color-primary) duration-300'>LinkedIn</span>
-          <span className='font-semibold cursor-pointer hover:text-(--color-primary) duration-300'>GitHub</span>
+          <span className='font-semibold cursor-pointer hover:text-(--color-btn) duration-300'>Twitter</span>
+          <span className='font-semibold cursor-pointer hover:text-(--color-btn) duration-300'>LinkedIn</span>
+          <span className='font-semibold cursor-pointer hover:text-(--color-btn) duration-300'>GitHub</span>
         </div>
       </div>
     </div>

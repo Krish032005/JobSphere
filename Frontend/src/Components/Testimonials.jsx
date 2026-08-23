@@ -14,18 +14,24 @@ const Testimonials = () => {
       </div>
 
       <div className='grid grid-cols-3 gap-6'>
+
         {testimonials.map((t, i) => (
           <div key={i} className='bg-(--color-surface) border border-(--color-border) rounded-lg p-6 flex flex-col gap-6'>
+
             <p className='font-semibold text-lg'>"{t.quote}"</p>
+
             <div className='flex items-center gap-3 mt-auto'>
               <div className='w-10 h-10 rounded-full bg-(--color-surface-secondary) border border-(--color-border)' />
               <div>
-                <p className='font-bold text-(--color-primary-hover)'>{t.name}</p>
-                <p className='text-sm font-semibold text-(--color-text-secondary)'>{t.role}</p>
+                <p className='font-bold text-(--color-btn)'>{t.name}</p>
+                <p className='text-sm font-semibold'>
+                  {t.role}</p>
               </div>
             </div>
+
           </div>
         ))}
+
       </div>
     </div>
   )

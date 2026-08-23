@@ -15,7 +15,7 @@ const FeaturedJobs = () => {
       <div className='flex justify-between items-end mb-10'>
         <div>
           <h2 className='font-bold text-3xl mb-2'>Featured jobs</h2>
-          <p className='text-lg font-semibold text-(--color-text-secondary)'>Hand-picked openings from companies hiring right now</p>
+          <p className='text-lg font-semibold text-(--color-text-hover)'>Hand-picked openings from companies hiring right now</p>
         </div>
         <button className='overflow-hidden h-5 text-lg cursor-pointer'>
           <span className='flex flex-col hover:-translate-y-1/2 duration-300 ease-out'>
@@ -29,13 +29,13 @@ const FeaturedJobs = () => {
         {jobs.map((job, i) => (
           <div
             key={i}
-            className='bg-(--color-surface) border border-(--color-border) rounded-lg p-6 flex flex-col gap-4 cursor-pointer hover:border-white/30 hover:-translate-y-1 duration-300'
+            className='bg-linear-to-t from-(--color-bg) to-(--color-navbar) border border-(--color-navbar)  rounded-lg p-6 flex flex-col gap-4 cursor-pointer hover:border-(--color-border) hover:-translate-y-1 duration-300'
           >
             <div className='flex justify-between items-start'>
-              <div className='w-12 h-12 rounded-lg bg-(--color-primary-hover) flex items-center justify-center font-bold text-lg'>
+              <div className='w-12 h-12 rounded-lg bg-(--color-card-logo) flex items-center justify-center font-bold text-lg'>
                 {job.company.charAt(0)}
               </div>
-              <span className='text-sm font-semibold px-3 py-1 rounded-full bg-(--color-primary)'>
+              <span className='text-sm font-semibold px-3 py-1 rounded-full bg-(--color-btn)'>
                 {job.type}
               </span>
             </div>
