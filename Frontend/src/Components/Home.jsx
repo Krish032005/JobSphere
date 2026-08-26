@@ -10,15 +10,17 @@ import Footer from './Footer'
 
 const Home = () => {
   return (
-    <div className='w-full text-white bg-(--color-bg)'>
+    <div className=''>
+    <div className='w-full text-white '>
       <Navbar/>
-      <CenterContent/>
-      <FeaturedJobs/>
+      {/* <CenterContent/> */}
+      {/* <FeaturedJobs/>
       <Categories/>
       <HowItWorks/>
       <Testimonials/>
       <CTA/>
-      <Footer/>
+      <Footer/> */}
+    </div>
     </div>
   )
 }

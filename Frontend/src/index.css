@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
 :root {
+  
+  --var-text-second : #e9357b;
+  --var-text-muted : #535353;
+  --var-left-card : #101617;
+
+  --var-demo : #f47caa;
+
+  --var-bg : #fffdfe;
+  --var-navbar : #ffff;
+
+  --var-secondary-btn : #d11f68;
+
   --color-bg: #0F1B1C;
   --color-navbar: #274245;
-  --color-navbar-hover : #1b3133;
+  --color-navbar-hover : #1b313392;
   --color-btn: #f18a15;
   --color-btn-hover: #d9770a;
 
@@ -11,7 +23,21 @@
   --color-card-logo : #25585c;
 
   --color-border: #537a7e;
-  --color-text: #F1F1EF;
+  --color-text: #051316;
   --color-text-hover: #f18a15;
+
+  --background : #082c1c;
+  --text : rgb(58 134 255 / 0.5);
+   --page-bg: 
+   radial-gradient(640px 360px at 10% 12%, rgba(233, 53, 123, 0.07), transparent 65%), 
+   radial-gradient(640px 360px at 90% 16%, rgba(91, 51, 83, 0.08), transparent 65%);
 }
+
+.page-bg{
+ background: 
+  radial-gradient(640px 360px at 10% 12%, rgba(233, 53, 123, 0.07), transparent 100%), 
+   radial-gradient(640px 360px at 90% 16%, rgba(91, 51, 83, 0.08), transparent 65%);
+}
+
+
 
