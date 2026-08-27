@@ -5,7 +5,8 @@
   --var-text-second : #e9357b;
   --var-text-muted : #535353;
   --var-left-card : #101617;
-
+  
+  --var-company : #051316 ;
   --var-demo : #f47caa;
 
   --var-bg : #fffdfe;
@@ -38,6 +39,9 @@
   radial-gradient(640px 360px at 10% 12%, rgba(233, 53, 123, 0.07), transparent 100%), 
    radial-gradient(640px 360px at 90% 16%, rgba(91, 51, 83, 0.08), transparent 65%);
 }
+
+
+/* Style or Ready Components style */
 
 
 
