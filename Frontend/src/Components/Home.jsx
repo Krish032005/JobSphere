@@ -15,12 +15,9 @@ const Home = () => {
       <Navbar/>
       <CenterContent/>
       <HowItWorks/>
-      {/* <Testimonials/>
+      <Testimonials/>
       <CTA/>
-      <Footer/> */}
-      {/* <FeaturedJobs/>
-      <Categories/> */}
-
+      <Footer/>
     </div>
     </div>
   )
