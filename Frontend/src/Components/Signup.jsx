@@ -1,12 +1,56 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import API from "../Api";
 
 const Signup = () => {
   const Navigate = useNavigate()
-  const [role, setRole] = useState('candidate')
+  // Name 
+  const [Name, setName] = useState("");
+  // Email
+  const [Email, setEmail] = useState("");
+  // Password 
+  const [Password, setPassword] = useState("");
+  // Confirm 
+  const [Confirm, setConfirm] = useState("");
+  // role
+  const [role, setRole] = useState('candidate');
+  
+
+  
 
   function login() {
     Navigate('/login')
+  }
+
+  const Register = async(e)=>{
+    e.preventDefault();
+
+    if(!Name || !Email || !Password || !Confirm || !role){
+      return alert("Please fill all fields");
+    }
+
+    if (Password !== Confirm) {
+      return alert("Passwords do not match");
+    }
+    
+    try{
+      const res = await API.post("/auth/register", {
+        name : Name,
+        email : Email,
+        password : Password,
+        role,
+      });
+
+      alert(res.data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirm("");
+      setRole("candidate");
+    }
+    catch(err){
+      alert(err.response?.data?.message || "Registration failed");
+    }
   }
 
   return (
@@ -127,7 +171,7 @@ const Signup = () => {
 
 
           {/* Form */}
-          <form className="flex flex-col gap-4 sm:gap-5">
+          <form className="flex flex-col gap-4 sm:gap-5" onSubmit={Register}>
 
             {/* Full Name */}
             <div className="flex flex-col gap-2">
@@ -139,6 +183,8 @@ const Signup = () => {
               <input
                 type="text"
                 placeholder="Ananya Rao"
+                value={Name}
+                onChange={(e)=>{ setName(e.target.value)}}
                 className="
                   w-full
                   border border-(--color-border)
@@ -168,6 +214,8 @@ const Signup = () => {
               <input
                 type="email"
                 placeholder="you@example.com"
+                value={Email}
+                onChange={(e)=>{setEmail(e.target.value)}}
                 className="
                   w-full
                   border border-(--color-border)
@@ -197,6 +245,8 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="••••••••"
+                value={Password}
+                onChange={(e)=>{setPassword(e.target.value)}}
                 className="
                   w-full
                   border border-(--color-border)
@@ -226,6 +276,8 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="••••••••"
+                value={Confirm}
+                onChange={(e)=>{setConfirm(e.target.value)}}
                 className="
                   w-full
                   border border-(--color-border)
