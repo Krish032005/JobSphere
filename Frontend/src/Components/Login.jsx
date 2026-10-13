@@ -1,9 +1,35 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 const Login = () => {
   const Navigate = useNavigate()
-  const [role, setRole] = useState('candidate')
+  const [role, setRole] = useState('candidate');
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+
+  const Handler = async(e)=>{
+    e.preventDefault();
+
+    if(!Email || !Password){
+      return alert("Please fill all fields");
+    }
+
+    try{
+      
+      const result = await API.post("/auth/login", {
+        email : Email,
+        password : Password
+      })
+      alert(result.data.message);
+      setEmail("");
+      setPassword("");
+
+    }
+    catch(err){
+      alert(err.response?.data?.message || "Login failed");
+    }
+  }
 
   function signup() {
     Navigate('/signup')
@@ -24,7 +50,7 @@ const Login = () => {
             JobSphere
           </h1>
 
-          <p className="font-semibold text-sm sm:text-base text-(--var-secondary-btn) mt-2">
+          <p className="font-semibold text-sm sm:text-base text-(--var-demo) mt-2">
             Welcome back
           </p>
 
@@ -123,6 +149,8 @@ const Login = () => {
 
               <input
                 type="email"
+                value={Email}
+                onChange={(e)=>setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className="
                   w-full
@@ -167,6 +195,8 @@ const Login = () => {
 
               <input
                 type="password"
+                value={Password}
+                onChange={(e)=> setPassword(e.target.value)}
                 placeholder="******"
                 className="
                   w-full
@@ -205,6 +235,7 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
+              onClick={Handler}
               className="
                 w-full
                 font-semibold

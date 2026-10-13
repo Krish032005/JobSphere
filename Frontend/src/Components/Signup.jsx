@@ -54,30 +54,23 @@ const Signup = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-(--var-company) px-4 sm:px-6 py-8 sm:py-12 relative">
+    <div className="w-full min-h-screen flex items-center justify-center  px-4 sm:px-6 py-8 sm:py-12 relative bg-(--var-demo)/20 ">
 
       {/* Background Glow */}
-      <div
-        className="
-          absolute
-          bg-(--var-text-second)
-          w-40 h-60
-          md:w-100 md:h-80
-          rounded-full
-          blur-[180px]
-        "
-      />
+      
+       
+      
 
       <div className="w-full max-w-md z-1">
 
         {/* Logo */}
         <div className="text-center mb-6 sm:mb-8">
 
-          <h1 className="font-bold text-2xl sm:text-3xl text-(--var-bg)">
+          <h1 className="font-bold text-2xl sm:text-3xl text-(--var-company)">
             JobSphere
           </h1>
 
-          <p className="font-semibold text-sm sm:text-base text-(--var-secondary-btn) mt-2">
+          <p className="font-semibold text-lg sm:text-base text-(--var-secondary-btn) mt-2">
             Create your account
           </p>
 
@@ -87,13 +80,25 @@ const Signup = () => {
         {/* Signup Card */}
         <div
           className="
-            bg-(--var-company)/80
+            relative
+            bg-white
             text-(--var-bg)
             rounded-xl
             p-5 sm:p-8
             shadow-2xl
+            overflow-hidden
           "
         >
+
+          {/* background glow  */}
+          <div 
+          className='
+          absolute right-0 top-0
+          bg-(--var-demo)
+          w-15 h-15
+          rounded-full
+          blur-[40px]
+          '></div>
 
           {/* Role Toggle */}
           <div
@@ -133,7 +138,8 @@ const Signup = () => {
             <button
               type="button"
               onClick={() => setRole('candidate')}
-              className="
+              className={`
+                ${role == "candidate"? "text-white":"text-black"}
                 relative
                 z-10
                 flex-1
@@ -143,7 +149,7 @@ const Signup = () => {
                 cursor-pointer
                 transition-colors
                 duration-300
-              "
+                `}
             >
               I'm a Candidate
             </button>
@@ -152,17 +158,19 @@ const Signup = () => {
             <button
               type="button"
               onClick={() => setRole('recruiter')}
-              className="
+              className={`
+              ${role == 'recruiter'? "text-white":"text-black"}
                 relative
                 z-10
                 flex-1
                 font-semibold
                 text-sm
+                
                 py-2
                 cursor-pointer
                 transition-colors
                 duration-300
-              "
+              `}
             >
               I'm a Recruiter
             </button>

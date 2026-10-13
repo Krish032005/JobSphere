@@ -10,6 +10,7 @@ import AppliedJobs from './Components/AppliedJobs'
 import RecruiterProfile from './Components/RecruiterProfile'
 import CreateJobPost from './Components/CreateJobPost'
 import Applicants from './Components/Applicants'
+import EditProfile from "./Components/EditProfile"
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/login' element={<Login/>} />
 
         <Route path='/candidate/profile' element={<CandidateProfile/>} />
+        <Route path="/candidate/editprofile" element={<EditProfile/>}/>
         <Route path='/candidate/search' element={<SearchJobs/>} />
         <Route path='/candidate/saved' element={<SavedJobs/>} />
         <Route path='/candidate/applied' element={<AppliedJobs/>} />

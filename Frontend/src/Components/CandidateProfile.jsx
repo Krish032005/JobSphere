@@ -1,52 +1,105 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
+import API from "../API";
+
 
 const skills = [
-  'React',
-  'TypeScript',
-  'Node.js',
-  'Tailwind CSS',
-  'GraphQL',
-  'PostgreSQL',
+  // 'React',
+  // 'TypeScript',
+  // 'Node.js',
+  // 'Tailwind CSS',
+  // 'GraphQL',
+  // 'PostgreSQL',
 ]
 
 const experience = [
-  {
-    role: 'Frontend Engineer',
-    company: 'Nimbus Labs',
-    duration: '2023 — Present',
-    desc: 'Building the core product dashboard and design system.',
-  },
-  {
-    role: 'Junior Developer',
-    company: 'Fernway',
-    duration: '2021 — 2023',
-    desc: 'Worked on internal tooling and API integrations.',
-  },
+  // {
+  //   role: 'Frontend Engineer',
+  //   company: 'Nimbus Labs',
+  //   duration: '2023 — Present',
+  //   desc: 'Building the core product dashboard and design system.',
+  // },
+  // {
+  //   role: 'Junior Developer',
+  //   company: 'Fernway',
+  //   duration: '2021 — 2023',
+  //   desc: 'Worked on internal tooling and API integrations.',
+  // },
 ]
 
 const education = [
-  {
-    degree: 'B.Tech, Computer Science',
-    school: 'Mumbai University',
-    duration: '2017 — 2021',
-  },
+  // {
+  //   degree: 'B.Tech, Computer Science',
+  //   school: 'Mumbai University',
+  //   duration: '2017 — 2021',
+  // },
 ]
 
+
+
 const CandidateProfile = () => {
+
+
+// Have : name, avatar, role, location, experience, about, education, resume, skills, Contact 
+// Backend have : bio, education, experience, phone, preferredJobType, skills,  user : id, name, email, 
+  const Navigate = useNavigate()
+  const Edit = ()=>{
+    Navigate("/candidate/editprofile");
+  }
+
+  const [Skills, setSkills] = useState({});
+  const [Experience, setExperience] = useState({});
+  const [Education, setEducation] = useState({});
+  const [About, setAbout] = useState("");
+  const [Avatar, setAvatar] = useState("");
+  const [Resume, setResume] = useState("");
+  const [Location, setLocation] = useState("");
+  const [Phone,setPhone] = useState("");
+
+  const [Name, setName] = useState("");
+  const [Email,setEmail] = useState("");
+
+  useEffect(()=>{
+    const fetchProfile = async()=>{
+      try{
+        const response = await API.get("candidate/profile");
+
+        console.log(response);
+        setSkills(response.data.candidate.skills);
+        setExperience(response.data.candidate.experience);
+        setAbout(response.data.candidate.bio);
+        setAvatar(response.data.candidate.avatar);
+        setLocation(response.data.candidate.location);
+        setPhone(response.data.candidate.phone);
+
+        setName(response.data.candidate.user.name);
+        setEmail(response.data.candidate.user.email);
+
+        console.log(Name);
+        console.log(About);
+        
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    fetchProfile();
+  }, [])
+  
+
+
   return (
     <div
       className="
         w-full
         min-h-screen
-       page-bg
+       page-background
         px-4 sm:px-6 lg:px-10
         py-8 sm:py-10 lg:py-12
         relative
         overflow-hidden
       "
     >
-
-
       <div className="max-w-5xl mx-auto flex flex-col gap-6 sm:gap-8 relative ">
 
         {/* Header */}
@@ -97,7 +150,7 @@ const CandidateProfile = () => {
                   text-white
                 "
               >
-                Ananya Rao
+                {Name}
               </h1>
 
               <p
@@ -108,7 +161,7 @@ const CandidateProfile = () => {
                   mt-1
                 "
               >
-                Frontend Engineer · Mumbai, IN
+                Frontend Engineer · {Location}
               </p>
 
               <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-3">
@@ -145,6 +198,7 @@ const CandidateProfile = () => {
 
           {/* Edit Profile */}
           <button
+          onClick={Edit}
             className="
               w-full sm:w-auto
               font-semibold
@@ -203,10 +257,7 @@ const CandidateProfile = () => {
                   leading-relaxed
                 "
               >
-                Frontend engineer with 4 years of experience building fast,
-                accessible web applications. Focused on design systems,
-                performance, and clean component architecture. Currently
-                exploring roles with more product ownership.
+                {About}
               </p>
 
             </div>
@@ -553,7 +604,7 @@ const CandidateProfile = () => {
                     break-all
                   "
                 >
-                  ananya.rao@email.com
+                  {Email}
                 </p>
 
                 <p
@@ -563,7 +614,7 @@ const CandidateProfile = () => {
                     text-gray-200
                   "
                 >
-                  +91 98765 43210
+                  {Phone}
                 </p>
 
               </div>
