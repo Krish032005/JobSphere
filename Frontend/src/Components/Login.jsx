@@ -36,37 +36,42 @@ const Login = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-(--var-company) px-4 sm:px-6 py-8 sm:py-12 relative">
+    <div className="w-full min-h-screen sm:flex justify-around items-center bg-(--background) px- sm:px- py-8 sm:py-12 relative">
 
-    <div className='absolute bg-(--var-text-second) w-40 h-60 md:w-100 md:h-80 rounded-full
-    blur-[180px]'></div>
+    
+        {/* Logo */} 
+        <div className=" mb-6 sm:mb-8 flex flex-col  items-center bg-amber-00  ">
 
-      <div className="w-full max-w-md z-1 ">
-
-        {/* Logo */}
-        <div className="text-center mb-6 sm:mb-8 ">
-
-          <h1 className="font-bold text-2xl sm:text-3xl text-(--var-bg)">
+          <div className='flex items-center'>
+            <div className='w-15 h-15 bg-amber-300 rounded-full sm:mr-6 '></div>
+           <h1 className=" text-2xl sm:text-8xl text-(--var-left-card) flex items-center">
             JobSphere
           </h1>
+          </div>
 
-          <p className="font-semibold text-sm sm:text-base text-(--var-demo) mt-2">
-            Welcome back
-          </p>
-
+          <p className="font-semibold text-sm sm:text-5xl text-(--var-secondary-btn) mt-2">
+           Welcome <span><i>back</i></span> 
+          </p>         
         </div>
-
+     
+   
+      {/* Login Card Element */}
+      <div className="w-full max-w-md z-1 ">
+        
+       
+      
         
 
         {/* Login Card */}
         <div className="
-          bg-(--var-company)/80
-          
-          text-(--var-bg)
+          bg-(--var-bg) (--var-company)
+          text-(--var-left-card)
           rounded-xl
           p-5 sm:p-8
           shadow-2xl
         ">
+
+          
 
 
           {/* Role Toggle */}
@@ -80,6 +85,7 @@ const Login = () => {
             mb-6 sm:mb-8
             overflow-hidden
           ">
+            
 
             {/* Sliding Background */}
             <div
@@ -89,7 +95,7 @@ const Login = () => {
                 bottom-1
                 w-[calc(50%-4px)]
                 rounded-md
-                bg-(--var-text-second)
+                bg-(--var-left-card)
                 transition-transform
                 duration-300
                 ease-in-out
@@ -102,11 +108,12 @@ const Login = () => {
             <button
               onClick={() => setRole('candidate')}
               className={`
+                 ${role == "candidate"? "text-white":"text-black"}
                 relative
                 z-10
                 flex-1
-                font-semibold
-                text-sm
+                font-bold
+                text-md
                 py-2
                 cursor-pointer
                 transition-colors
@@ -114,24 +121,25 @@ const Login = () => {
                
               `}
             >
-              Candidate
+            Candidate
             </button>
 
             <button
               onClick={() => setRole('recruiter')}
               className={`
+                ${role == 'recruiter'? "text-white":"text-black"}
                 relative
                 z-10
                 flex-1
-                font-semibold
-                text-sm
+                font-bold
+                text-md
                 py-2
                 cursor-pointer
                 transition-colors
                 duration-300
               `}
             >
-              Recruiter
+            Recruiter
             </button>
 
           </div>
@@ -143,7 +151,7 @@ const Login = () => {
             {/* Email */}
             <div className="flex flex-col gap-2">
 
-              <label className="font-semibold text-sm ">
+              <label className="font-semibold text-md ">
                 Email address
               </label>
 
@@ -159,7 +167,7 @@ const Login = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -176,7 +184,7 @@ const Login = () => {
 
               <div className="flex justify-between items-center gap-3">
 
-                <label className="font-semibold text-sm ">
+                <label className="font-semibold text-md ">
                   Password
                 </label>
 
@@ -205,7 +213,7 @@ const Login = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -225,7 +233,7 @@ const Login = () => {
                 className="w-4 h-4 cursor-pointer accent-(--var-text-second)"
               />
 
-              <p className="text-sm font-semibold text-(--var-bg)">
+              <p className="text-sm font-semibold text-(--var-left-card)">
                 Remember me
               </p>
 
@@ -240,13 +248,13 @@ const Login = () => {
                 w-full
                 font-semibold
                 text-base sm:text-lg
-                bg-(--var-text-second)
+                bg-(--var-left-card)
                 text-white
                 rounded-lg
                 py-3
                 mt-1 sm:mt-2
                 cursor-pointer
-                hover:bg-(--var-demo)
+                hover:bg-(--var-left-card)/80
                 active:scale-[0.98]
                 transition-all
                 duration-200
@@ -259,13 +267,12 @@ const Login = () => {
 
         </div>
 
-
         {/* Signup */}
         <p className="
           text-center
           font-semibold
           text-sm sm:text-base
-          text-(--var-bg)
+          text-(--var-left-card)
           mt-5 sm:mt-6
         ">
 
@@ -285,6 +292,7 @@ const Login = () => {
           </span>
 
         </p>
+
 
       </div>
 

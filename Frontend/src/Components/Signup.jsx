@@ -54,21 +54,21 @@ const Signup = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center  px-4 sm:px-6 py-8 sm:py-12 relative bg-(--var-demo)/20 ">
+    <div className="w-full min-h-screen flex items-center justify-center  px-4 sm:px-6 py-4 sm:py-6 relative bg-(--background) (--var-background) ">
 
       {/* Background Glow */}
-      
+     
        
       
 
       <div className="w-full max-w-md z-1">
 
         {/* Logo */}
-        <div className="text-center mb-6 sm:mb-8">
+        <div className="text-center mb-6 sm:mb-6">
 
-          <h1 className="font-bold text-2xl sm:text-3xl text-(--var-company)">
-            JobSphere
-          </h1>
+          <h2 className="font-bold text-2xl sm:text-3xl text-(--var-left-card)">
+            Jobsphere
+          </h2>
 
           <p className="font-semibold text-lg sm:text-base text-(--var-secondary-btn) mt-2">
             Create your account
@@ -82,23 +82,18 @@ const Signup = () => {
           className="
             relative
             bg-white
-            text-(--var-bg)
+            text-(--var-left-card)
+            font-semibold
             rounded-xl
             p-5 sm:p-8
             shadow-2xl
             overflow-hidden
+            
           "
         >
 
           {/* background glow  */}
-          <div 
-          className='
-          absolute right-0 top-0
-          bg-(--var-demo)
-          w-15 h-15
-          rounded-full
-          blur-[40px]
-          '></div>
+          
 
           {/* Role Toggle */}
           <div
@@ -109,7 +104,7 @@ const Signup = () => {
               border border-(--color-navbar-hover)
               rounded-lg
               p-1
-              mb-6 sm:mb-8
+              mb-6 sm:mb-6
               overflow-hidden
             "
           >
@@ -122,7 +117,7 @@ const Signup = () => {
                 bottom-1
                 w-[calc(50%-4px)]
                 rounded-md
-                bg-(--var-text-second)
+                bg-(--var-left-card)
                 transition-transform
                 duration-300
                 ease-in-out
@@ -143,8 +138,8 @@ const Signup = () => {
                 relative
                 z-10
                 flex-1
-                font-semibold
-                text-sm
+                font-bold
+                text-md
                 py-2
                 cursor-pointer
                 transition-colors
@@ -163,8 +158,8 @@ const Signup = () => {
                 relative
                 z-10
                 flex-1
-                font-semibold
-                text-sm
+                font-bold
+                text-md
                 
                 py-2
                 cursor-pointer
@@ -179,12 +174,12 @@ const Signup = () => {
 
 
           {/* Form */}
-          <form className="flex flex-col gap-4 sm:gap-5" onSubmit={Register}>
+          <form className="flex flex-col gap-2 sm:gap-2" onSubmit={Register}>
 
             {/* Full Name */}
             <div className="flex flex-col gap-2">
 
-              <label className="font-semibold text-sm">
+              <label className="font-semibold text-md">
                 Full name
               </label>
 
@@ -200,7 +195,7 @@ const Signup = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -215,7 +210,7 @@ const Signup = () => {
             {/* Email */}
             <div className="flex flex-col gap-2">
 
-              <label className="font-semibold text-sm">
+              <label className="font-semibold text-md">
                 Email address
               </label>
 
@@ -231,7 +226,7 @@ const Signup = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -246,7 +241,7 @@ const Signup = () => {
             {/* Password */}
             <div className="flex flex-col gap-2">
 
-              <label className="font-semibold text-sm">
+              <label className="font-semibold text-md">
                 Password
               </label>
 
@@ -262,7 +257,7 @@ const Signup = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -277,7 +272,7 @@ const Signup = () => {
             {/* Confirm Password */}
             <div className="flex flex-col gap-2">
 
-              <label className="font-semibold text-sm">
+              <label className="font-semibold text-md">
                 Confirm password
               </label>
 
@@ -293,7 +288,7 @@ const Signup = () => {
                   px-4
                   py-3
                   text-sm sm:text-base
-                  placeholder:text-gray-200
+                  placeholder:text-gray-300
                   bg-transparent
                   focus:outline-none
                   focus:border-(--color-primary)
@@ -318,7 +313,7 @@ const Signup = () => {
                 "
               />
 
-              <p className="text-sm font-semibold text-(--var-bg)">
+              <p className="text-sm font-semibold text-(--var-left-card)">
                 I agree to the Terms of Service and Privacy Policy
               </p>
 
@@ -332,13 +327,13 @@ const Signup = () => {
                 w-full
                 font-semibold
                 text-base sm:text-lg
-                bg-(--var-text-second)
+                bg-(--var-left-card)
                 text-white
                 rounded-lg
                 py-3
                 mt-1 sm:mt-2
                 cursor-pointer
-                hover:bg-(--var-demo)
+                hover:bg-(--var-left-card)/80
                 active:scale-[0.98]
                 transition-all
                 duration-200
@@ -358,7 +353,7 @@ const Signup = () => {
             text-center
             font-semibold
             text-sm sm:text-base
-            text-(--var-bg)
+            text-(--var-left-card)
             mt-5 sm:mt-6
           "
         >

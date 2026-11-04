@@ -93,7 +93,7 @@ const CandidateProfile = () => {
       className="
         w-full
         min-h-screen
-       page-background
+        bg-(--background)
         px-4 sm:px-6 lg:px-10
         py-8 sm:py-10 lg:py-12
         relative
@@ -105,11 +105,10 @@ const CandidateProfile = () => {
         {/* Header */}
         <div
           className="
-            bg-(--var-company)
-            border border-(--color-navbar-hover)
+            bg-(--var-background)
+            shadow-2xl
             rounded-xl
             p-5 sm:p-8
-            
             flex
             flex-col
             sm:flex-row
@@ -129,8 +128,7 @@ const CandidateProfile = () => {
                 w-18 h-18
                 sm:w-24 sm:h-24
                 rounded-full
-                bg-(--var-text-second)
-                border border-(--color-navbar-hover)
+                bg-(--var-secondary-btn)
                 flex items-center justify-center
                 font-bold
                 text-xl sm:text-2xl
@@ -147,17 +145,17 @@ const CandidateProfile = () => {
                 className="
                   font-bold
                   text-xl sm:text-2xl
-                  text-white
+                  text-(--var-left-card)
                 "
               >
-                {Name}
+                {/* {Name} */}KRISH 
               </h1>
 
               <p
                 className="
                   font-semibold
                   text-sm sm:text-base
-                  text-gray-200
+                  text-gray-400
                   mt-1
                 "
               >
@@ -172,7 +170,7 @@ const CandidateProfile = () => {
                     font-semibold
                     px-3 py-1
                     rounded-full
-                    bg-(--var-text-second)
+                    bg-(--var-demo)
                     text-white
                   "
                 >
@@ -203,7 +201,7 @@ const CandidateProfile = () => {
               w-full sm:w-auto
               font-semibold
               text-sm
-              bg-(--var-text-second)
+              bg-(--var-left-card)
               text-white
               rounded-lg
               px-5
@@ -230,7 +228,7 @@ const CandidateProfile = () => {
             {/* About */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-8
@@ -266,7 +264,7 @@ const CandidateProfile = () => {
             {/* Experience */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-8
@@ -362,7 +360,7 @@ const CandidateProfile = () => {
             {/* Education */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-8
@@ -442,7 +440,7 @@ const CandidateProfile = () => {
             {/* Skills */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-6
@@ -493,7 +491,7 @@ const CandidateProfile = () => {
             {/* Resume */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-6
@@ -575,7 +573,7 @@ const CandidateProfile = () => {
             {/* Contact */}
             <div
               className="
-                bg-(--var-company)
+                bg-(--var-background)
                 border border-(--color-navbar-hover)
                 rounded-xl
                 p-5 sm:p-6

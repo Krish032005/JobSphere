@@ -8,7 +8,7 @@
   
   --var-company : #051316 ;
   --var-demo : #f47caa;
-
+  --var-background : #fafafa;
   --var-bg : #fffdfe;
   --var-navbar : #ffff;
 
@@ -27,7 +27,7 @@
   --color-text: #051316;
   --color-text-hover: #f18a15;
 
-  --background : #082c1c;
+  --background : #fef4f9;
   --text : rgb(58 134 255 / 0.5);
    --page-bg: 
    radial-gradient(640px 360px at 10% 12%, rgba(233, 53, 123, 0.07), transparent 65%), 
@@ -39,6 +39,12 @@
   radial-gradient(640px 360px at 10% 12%, rgba(233, 53, 123, 0.07), transparent 100%), 
    radial-gradient(640px 360px at 90% 16%, rgba(91, 51, 83, 0.08), transparent 65%);
 }
+.radial-bg{
+   background:
+   radial-gradient(circle at 15% 12%, #fdebf3 0, transparent 30rem),
+   radial-gradient(circle at 85% 18%, #fff0f5 0, transparent 28rem),
+   var(--background);
+}
 
 .page-background{
    background: gainsboro;
@@ -46,6 +52,8 @@
 
 
 /* Style or Ready Components style */
-
+h1{
+   font-family: Anton;
+}
 
 
