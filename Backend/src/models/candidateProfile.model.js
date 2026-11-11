@@ -13,6 +13,7 @@ const candidateSchema = new mongoose.Schema({
     },
     location : {
         type : String,
+        default : "Mumbai - IN"
     },
     bio : {
         type : String ,
